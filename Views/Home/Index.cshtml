@@ -1,0 +1,26 @@
+﻿@model TechnicalAssessmentTask.ViewModels.GithubUserSearchViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Github user info finder</h1>
+    <p class="lead">A groovy MVC app that uses dependency injection, MVVM, repositories and services to get data from Github </p>
+    <p><a href="https://github.com" class="btn btn-primary btn-lg">Github &raquo;</a></p>
+</div>
+
+<form asp-controller="Home" method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Search username</h2>
+            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.UserName)
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-4">
+            <input type="submit" name="getUserSubmit" class="btn btn-primary btn" />
+        </div>
+    </div>
+</form>

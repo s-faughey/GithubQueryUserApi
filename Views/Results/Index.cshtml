@@ -1,0 +1,51 @@
+﻿@model TechnicalAssessmentTask.ViewModels.ResultsViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Github user info finder</h1>
+    <p class="lead">A groovy MVC app that uses dependency injection, MVCVM, repositories and services to get data from Github </p>
+    <p><a href="https://github.com" class="btn btn-primary btn-lg">Github &raquo;</a></p>
+</div>
+
+<form asp-controller="Home" method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>User information</h2>
+            <div class="row">
+                <img src="@Url.Content(Model.GithubUser.AvatarUrl)" alt="User avatar" />
+            </div>
+            <div class="row">
+                @Html.LabelFor(x => x.GithubUser.Username)
+                @Html.DisplayFor(x => x.GithubUser.Username, new { @class = "form-control" })
+            </div>
+            <div class="row">
+                @Html.LabelFor(x => x.GithubUser.Location)
+                @Html.DisplayFor(x => x.GithubUser.Location, new { @class = "form-control" })
+            </div>
+            <h3>Top 5 Stargazed repositories</h3>
+            @foreach(var repository in Model.Repos)
+            {
+                <div class="row">
+                    @Html.LabelFor(x => repository.Name)
+                    <a href="@repository.Url">@repository.Name</a>
+                </div>
+                <div class="row">
+                    <p>
+                        @Html.LabelFor(x => repository.Description)
+                        @Html.DisplayFor(x => repository.Description)
+                    </p>
+                </div>
+                <h4>Stargazers</h4>
+                foreach(var gazer in repository.Stargazers)
+                {
+                    <div class="row">
+                        @Html.DisplayFor(x => gazer.Username)
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</form>
